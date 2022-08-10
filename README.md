@@ -1,4 +1,4 @@
-# Next.js + Tailwind CSS Example
+# NextJS MERN Netflix WebApp
 
 1. add .nvmrc
 2. add .npmrc
