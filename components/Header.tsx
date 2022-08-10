@@ -1,9 +1,33 @@
 import { BellIcon, SearchIcon } from '@heroicons/react/solid';
 import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 
-export const Header = () => {
+/**
+ * * @define the header component
+ * @returns React Node
+ */
+export const Header: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // remove the handler before the next time event trigger
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <header>
+    <header className={`${isScrolled && 'bg-purple-900'}`}>
       <div className="flex items-center space-x-2 md:space-x-10">
         {/* this is svg, so donot use Image  */}
         <img
