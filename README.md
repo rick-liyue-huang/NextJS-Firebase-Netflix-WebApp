@@ -1,4 +1,4 @@
-# NextJS MERN Netflix WebApp
+# NextJS Firebase Netflix WebApp
 
 ### Project configuration
 
