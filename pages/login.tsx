@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -8,7 +9,7 @@ interface Inputs {
   password: string;
 }
 
-const loginPage = () => {
+const LoginPage: NextPage = () => {
   const [login, setLogin] = useState(false);
 
   const {
@@ -103,4 +104,4 @@ const loginPage = () => {
   );
 };
 
-export default loginPage;
+export default LoginPage;
