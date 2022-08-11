@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -9,7 +8,7 @@ interface Inputs {
   password: string;
 }
 
-const loginPage: NextPage = () => {
+const loginPage = () => {
   const [login, setLogin] = useState(false);
 
   const {
