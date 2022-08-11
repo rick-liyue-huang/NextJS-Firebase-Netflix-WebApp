@@ -24,3 +24,10 @@
 1. this project combines with tailwindcss;
 2. modify the file of 'global.css' to add some global component and page style;
 3. complete the header part.
+
+### Create the Login Page
+
+1. import firebase configuration from the created firebase project,
+2. create the login page
+3. create the custom hook for auth, and return the reactnode for \_app.tsx
+4.
