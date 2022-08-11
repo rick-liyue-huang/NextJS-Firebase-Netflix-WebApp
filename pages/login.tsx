@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useAuth } from '../hooks/useAuth';
 
 interface Inputs {
   email: string;
@@ -10,7 +11,8 @@ interface Inputs {
 }
 
 const LoginPage: NextPage = () => {
-  const [login, setLogin] = useState(false);
+  const [logining, setLogining] = useState(false);
+  const { signup, signin } = useAuth();
 
   const {
     register,
@@ -19,10 +21,10 @@ const LoginPage: NextPage = () => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
-    if (login) {
-      // await signin
+    if (logining) {
+      await signin(email, password);
     } else {
-      // await signup;
+      await signup(email, password);
     }
   };
 
@@ -86,7 +88,7 @@ const LoginPage: NextPage = () => {
         <button
           className="w-full rounded bg-[#e50914] py-3 font-semibold"
           type="submit"
-          onClick={() => setLogin(true)}
+          onClick={() => setLogining(true)}
         >
           Login Now
         </button>
@@ -94,7 +96,8 @@ const LoginPage: NextPage = () => {
           Join Netflix?{' '}
           <button
             className="text-white hover:underline"
-            onClick={() => setLogin(false)}
+            onClick={() => setLogining(false)}
+            type="submit"
           >
             Register now
           </button>

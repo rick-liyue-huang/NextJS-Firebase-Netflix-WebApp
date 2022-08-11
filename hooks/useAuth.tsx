@@ -23,8 +23,8 @@ interface AuthProviderProps {
 
 interface IAuth {
   user: User | null;
-  register: (email: string, password: string) => Promise<void>;
-  login: (email: string, password: string) => Promise<void>;
+  signup: (email: string, password: string) => Promise<void>;
+  signin: (email: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
   error: string | null;
   loading: boolean;
@@ -32,8 +32,8 @@ interface IAuth {
 
 export const AuthContext = createContext<IAuth>({
   user: null,
-  register: async () => {},
-  login: async () => {},
+  signup: async () => {},
+  signin: async () => {},
   logout: async () => {},
   error: null,
   loading: false,
@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     [auth]
   );
 
-  const register = async (email: string, password: string) => {
+  const signup = async (email: string, password: string) => {
     setLoading(true);
 
     await createUserWithEmailAndPassword(auth, email, password)
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       .finally(() => setLoading(false));
   };
 
-  const login = async (email: string, password: string) => {
+  const signin = async (email: string, password: string) => {
     setLoading(true);
 
     await signInWithEmailAndPassword(auth, email, password)
@@ -109,8 +109,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     () => ({
       user,
       logout,
-      register,
-      login,
+      signin,
+      signup,
       loading,
       error,
     }),
