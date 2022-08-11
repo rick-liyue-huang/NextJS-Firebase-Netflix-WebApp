@@ -11,7 +11,7 @@ module.exports = {
       },
       backgroundImage: {
         'gradient-to-b':
-          'linear-gradient(to bottom,rgba(20,20,20,0) 0,rgba(20,20,20,.15) 15%,rgba(20,20,20,.35) 29%,rgba(20,20,20,.58) 44%,#141414 68%,#141414 100%);',
+          'linear-gradient(to bottom,rgba(88, 28, 135, 0) 0,rgba(88, 28, 135,.15) 15%,rgba(88, 28, 135,.35) 29%,rgba(88, 28, 135,.58) 44%,rgb(88, 28, 135, 0) 68%,rgba(88, 28, 135, 0) 100%);',
       },
     },
   },

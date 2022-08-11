@@ -50,7 +50,7 @@ const Home: NextPage<Props> = ({
       <main className="relative pl-3 pb-24 lg:space-y-24 lg:pl-16">
         {/* Banner */}
         <Banner netflixOriginals={netflixOriginals} />
-        <section className="md:space-y-20 ">
+        <section className="md:space-y-20">
           <Row title="Trending Now" movies={trendingNow} />
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />

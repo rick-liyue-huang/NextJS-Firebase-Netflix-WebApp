@@ -30,4 +30,10 @@
 1. import firebase configuration from the created firebase project,
 2. create the login page
 3. create the custom hook for auth, and return the reactnode for \_app.tsx
-4.
+
+### Create Modal Component
+
+1. Create the Modal component,
+2. import the recoil.js to manage state globally,
+3. get movie info from TMDB, and store in recoil state,
+4. extract the trailer key and get the trailer video from youtube.
