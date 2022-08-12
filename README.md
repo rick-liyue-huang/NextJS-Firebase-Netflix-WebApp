@@ -43,4 +43,13 @@
 1. create the account in stripe.com
 2. get the Secret key from api keys
 3. copy it to payment for stripe extension in firebase when configuration the extension.
-4.
+4. update the rules of firestore with the stripe extension rules
+5. copy webhooks url in stripe extension to end point of webhooks in stripe.com
+6. in stripe.com, select product.created, product.deleted, product.updated, price.created, price.deleted, price.updated, checkout.session.completed, customer.subscription.created, customer.subscription.deleted, customer.subscription.updated, payment_intent.processing, payment_intent.succeeded, payment_intent.canceled, payment_intent.payment_failed.
+7. after add endpoint, we get 'Signing secret'
+8. copy the 'signing secret' back to firebase extension in 'Stripe webhook secret'.
+9. thus, the stripe.com and stripe extension in firebase are connected each other.
+10. install '@stripe/firestore-stripe-payments' in project,
+11. create the three products (plans) in products named, basic, standard and premium,
+12. this will produce automatically the products collection!
+13. after that, these two collections can sync together.
