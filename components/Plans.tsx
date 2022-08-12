@@ -1,10 +1,23 @@
 import { CheckIcon } from '@heroicons/react/outline';
+import { Product } from '@stripe/firestore-stripe-payments';
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { Loader } from './Loader';
+import { Table } from './Table';
 
-export const Plans = () => {
+interface Props {
+  products: Product[];
+}
+
+export const Plans: React.FC<Props> = ({ products }) => {
   const { logout } = useAuth();
+  const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[1]);
+  const [isBillingLoading, setIsBillingLoading] = useState(false);
+
+  const subscribeToPlan = () => {};
+
   return (
     <div>
       <Head>
@@ -30,7 +43,7 @@ export const Plans = () => {
         </button>
       </header>
 
-      <main className="pt-28 max-w-5xl px-5 pb-12 transition-all">
+      <main className="mx-auto pt-28 max-w-5xl px-5 pb-12 transition-all">
         <h1 className="mb-3 text-3xl font-medium">
           Choose the plan that right for you
         </h1>
@@ -52,13 +65,35 @@ export const Plans = () => {
         <div className="mt-4 flex flex-col space-y-4">
           <div className="flex w-full items-center justify-center self-end md:w-3/5">
             {/* parent plan */}
-            <div className="planBox">standard</div>
-            <div className="planBox">standard</div>
-            <div className="planBox">standard</div>
+            {products.map((product) => (
+              <div
+                className={`planBox ${
+                  selectedPlan?.id === product.id ? 'opacity-100' : 'opacity-60'
+                }`}
+                key={product.id}
+                onClick={() => setSelectedPlan(product)}
+              >
+                {product.name}
+              </div>
+            ))}
           </div>
           {/* Table */}
+          <Table products={products} selectedPlan={selectedPlan} />
 
-          <button>Subscribe</button>
+          {/* button */}
+          <button
+            disabled={!selectedPlan || isBillingLoading}
+            className={`mx-auto w-11/12 rounded bg-[#E50914] py-4 text-xl shadow hover:bg-[#f6121d] md:w-[420px] ${
+              isBillingLoading && 'opacity-60'
+            }`}
+            onClick={subscribeToPlan}
+          >
+            {isBillingLoading ? (
+              <Loader color="dark:fill-gray-300" />
+            ) : (
+              'Subscribe'
+            )}
+          </button>
         </div>
       </main>
     </div>

@@ -1,3 +1,4 @@
+import { getProducts, Product } from '@stripe/firestore-stripe-payments';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { useRecoilValue } from 'recoil';
@@ -8,6 +9,7 @@ import { Modal } from '../components/Modal';
 import { Plans } from '../components/Plans';
 import { Row } from '../components/Row';
 import { useAuth } from '../hooks/useAuth';
+import { payments } from '../lib/stripe';
 import { Movie } from '../types';
 import requests from '../utils/requests';
 
@@ -20,6 +22,7 @@ interface Props {
   horrorMovies: Movie[];
   romanceMovies: Movie[];
   documentaries: Movie[];
+  products: Product[];
 }
 
 const Home: NextPage<Props> = ({
@@ -31,9 +34,12 @@ const Home: NextPage<Props> = ({
   comedyMovies,
   romanceMovies,
   documentaries,
+  products,
 }) => {
   const { loading } = useAuth();
   const showModal = useRecoilValue(modalState);
+
+  // console.log(products);
 
   // after login, need to check whether subscription
   const subscription = false;
@@ -45,7 +51,7 @@ const Home: NextPage<Props> = ({
   if (!subscription) {
     return (
       <div>
-        <Plans />
+        <Plans products={products} />
       </div>
     );
   }
@@ -110,6 +116,14 @@ export const getServerSideProps: GetServerSideProps = async () => {
     fetch(requests.fetchDocumentaries).then((res) => res.json()),
   ]);
 
+  // get the firebase products collections
+  const products = await getProducts(payments, {
+    includePrices: true,
+    activeOnly: true,
+  })
+    .then((res) => res)
+    .catch((err) => console.log(err.message));
+
   return {
     props: {
       netflixOriginals: netflixOriginals.results,
@@ -120,6 +134,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       horrorMovies: horrorMovies.results,
       romanceMovies: romanceMovies.results,
       documentaries: documentaries.results,
+      products: products,
     },
   };
 };
