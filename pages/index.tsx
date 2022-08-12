@@ -9,6 +9,7 @@ import { Modal } from '../components/Modal';
 import { Plans } from '../components/Plans';
 import { Row } from '../components/Row';
 import { useAuth } from '../hooks/useAuth';
+import { useSubscription } from '../hooks/useSubscription';
 import { payments } from '../lib/stripe';
 import { Movie } from '../types';
 import requests from '../utils/requests';
@@ -36,13 +37,15 @@ const Home: NextPage<Props> = ({
   documentaries,
   products,
 }) => {
-  const { loading } = useAuth();
+  const { loading, user } = useAuth();
   const showModal = useRecoilValue(modalState);
 
   // console.log(products);
 
   // after login, need to check whether subscription
-  const subscription = false;
+  const subscription = useSubscription(user);
+
+  console.log('subscription: ----', subscription);
 
   if (loading || subscription === null) {
     return null;

@@ -1,4 +1,5 @@
 import { BellIcon, SearchIcon } from '@heroicons/react/solid';
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 
@@ -49,14 +50,14 @@ export const Header: React.FC = () => {
         <SearchIcon className="hidden w-6 h-6 sm:inline" />
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="w-6 h-6" />
-        {/* <Link href={'/account'}> */}
-        <img
-          onClick={logout}
-          src="https://rb.gy/g1pwyx"
-          alt=""
-          className="cursor-pointer rounded"
-        />
-        {/* </Link> */}
+        <Link href={'/account'}>
+          <img
+            // onClick={logout}
+            src="https://rb.gy/g1pwyx"
+            alt=""
+            className="cursor-pointer rounded"
+          />
+        </Link>
       </div>
     </header>
   );

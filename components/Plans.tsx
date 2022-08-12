@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { loadCheckout } from '../lib/stripe';
 import { Loader } from './Loader';
 import { Table } from './Table';
 
@@ -12,11 +13,21 @@ interface Props {
 }
 
 export const Plans: React.FC<Props> = ({ products }) => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<Product | null>(products[1]);
   const [isBillingLoading, setIsBillingLoading] = useState(false);
 
-  const subscribeToPlan = () => {};
+  console.log(selectedPlan);
+
+  const subscribeToPlan = () => {
+    if (!user) {
+      return;
+    }
+
+    // connect with stripe, this will produce payment and show in stripe.com and firebase
+    loadCheckout(selectedPlan?.prices[0].id!);
+    setIsBillingLoading(true);
+  };
 
   return (
     <div>

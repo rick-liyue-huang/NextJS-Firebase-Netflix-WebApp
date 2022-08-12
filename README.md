@@ -53,4 +53,5 @@
 11. create the three products (plans) in products named, basic, standard and premium,
 12. this will produce automatically the products collection!
 13. after that, these two collections can sync together (from stripe to firebase).
-14. here have to note that add 'next-transpile-modules' on next.config.js
+14. here have to note that add 'next-transpile-modules' on next.config.js,
+15. create the custom hook 'useSubscription' to complete the subscription process and show the payment in stripe and customers in firebase
