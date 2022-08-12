@@ -37,3 +37,10 @@
 2. import the recoil.js to manage state globally,
 3. get movie info from TMDB, and store in recoil state,
 4. extract the trailer key and get the trailer video from youtube.
+
+### Process the Stripe for payment
+
+1. create the account in stripe.com
+2. get the Secret key from api keys
+3. copy it to payment for stripe extension in firebase when configuration the extension.
+4.

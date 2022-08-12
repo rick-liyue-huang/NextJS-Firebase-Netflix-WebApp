@@ -5,6 +5,7 @@ import { modalState } from '../atoms/modalAtom';
 import { Banner } from '../components/Banner';
 import { Header } from '../components/Header';
 import { Modal } from '../components/Modal';
+import { Plans } from '../components/Plans';
 import { Row } from '../components/Row';
 import { useAuth } from '../hooks/useAuth';
 import { Movie } from '../types';
@@ -34,12 +35,27 @@ const Home: NextPage<Props> = ({
   const { loading } = useAuth();
   const showModal = useRecoilValue(modalState);
 
-  if (loading) {
+  // after login, need to check whether subscription
+  const subscription = false;
+
+  if (loading || subscription === null) {
     return null;
   }
 
+  if (!subscription) {
+    return (
+      <div>
+        <Plans />
+      </div>
+    );
+  }
+
   return (
-    <div className="relative h-screen bg-gradient-to-b lg:h-[140vh]">
+    <div
+      className={`relative h-screen bg-gradient-to-b lg:h-[140vh] ${
+        showModal && '!h-screen overflow-hidden'
+      }`}
+    >
       <Head>
         <title>Home Netflix</title>
         <link rel="icon" href="/favicon.ico" />
